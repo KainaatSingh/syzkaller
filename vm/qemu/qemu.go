@@ -300,6 +300,16 @@ func (pool *Pool) Count() int {
 }
 
 func (pool *Pool) Create(workdir string, index int) (vmimpl.Instance, error) {
+        log.Logf(0, "I am in qemu Create")
+
+        output, err := exec.Command("sudo", "./remove-gvt.sh").Output()
+        if err != nil {
+                log.Logf(0, "Remove gvt error: %v", err)
+        }
+        log.Logf(0, "Output of remove gvt: %v", output)
+
+
+
 	sshkey := pool.env.SSHKey
 	sshuser := pool.env.SSHUser
 	if pool.env.Image == "9p" {
