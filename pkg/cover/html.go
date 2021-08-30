@@ -910,7 +910,7 @@ var coverTemplate = template.Must(template.New("").Parse(`
 			<span id="path/{{$dir.Path}}" class="caret hover">
 				{{$dir.Name}}
 				<span class="cover hover">
-					{{if $dir.Covered}}{{$dir.Percent}}%{{else}}---{{end}}
+					{{if $dir.Covered}}{{$dir.Covered}} ({{$dir.Percent}}%){{else}}---{{end}}
 					<span class="cover-right">of {{$dir.Total}}</span>
 				</span>
 			</span>
@@ -928,7 +928,7 @@ var coverTemplate = template.Must(template.New("").Parse(`
 				<span class="cover hover">
 					<a href="#{{$file.Path}}" id="path/{{$file.Path}}"
 						onclick="{{if .HasFunctions}}onPercentClick{{else}}onFileClick{{end}}({{$file.Index}})">
-                                                {{$file.Percent}}%
+                                                {{$file.Covered}} ({{$file.Percent}}%)
 					</a>
 					<span class="cover-right">of {{$file.Total}}</span>
 				</span>

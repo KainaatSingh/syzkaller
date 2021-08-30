@@ -1105,6 +1105,7 @@ func (mgr *Manager) newInput(inp rpctype.RPCInput, sign signal.Signal) bool {
 	}
 	sig := hash.String(inp.Prog)
 	if old, ok := mgr.corpus[sig]; ok {
+		log.Logf(0, "Updating corpus with hash: %v", sig)
 		// The input is already present, but possibly with diffent signal/coverage/call.
 		sign.Merge(old.Signal.Deserialize())
 		old.Signal = sign.Serialize()
@@ -1114,6 +1115,7 @@ func (mgr *Manager) newInput(inp rpctype.RPCInput, sign signal.Signal) bool {
 		old.Cover = cov.Serialize()
 		mgr.corpus[sig] = old
 	} else {
+		log.Logf(0, "Adding corpus with hash: %v", sig)
 		mgr.corpus[sig] = inp
 		mgr.corpusDB.Save(sig, inp.Prog, 0)
 		if err := mgr.corpusDB.Flush(); err != nil {
