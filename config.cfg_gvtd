@@ -1,0 +1,25 @@
+{
+	"target": "linux/amd64",
+	"http": "127.0.0.1:56741",
+	"workdir": "/home/kainaat/gopath/src/github.com/google/syzkaller/workdir",
+	"kernel_obj": "/home/kainaat/linux/",
+	"image": "/home/kainaat/image/stretch.img",
+	"sshkey": "/home/kainaat/image/stretch.id_rsa",
+	"syzkaller": "/home/kainaat/gopath/src/github.com/google/syzkaller",
+	"procs": 8,
+	"reproduce": false,
+	"type": "qemu",
+	"enable_syscalls":[
+		"openat$i915",
+		"ioctl$DRM_IOCTL_I915_*"
+	],
+	"vm": {
+		"count": 1,
+		"qemu_args": "-enable-kvm -cpu host,migratable=off -vga none -device vfio-pci,host=00:02.0,x-vga=on -append i915.reset=1,i915.verbose_state_checks=1,drm.debug=0x01,drm.debug=0x02,log_buf_len=1M",
+		"kernel": "/home/kainaat/linux/arch/x86/boot/bzImage",
+		"cpu": 4,
+		"mem": 2048
+	}
+
+
+}
